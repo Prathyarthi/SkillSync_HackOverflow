@@ -1,7 +1,7 @@
 import crypto from 'crypto';
 import fs from 'fs/promises';
 import cloudinary from 'cloudinary';
-
+import axios from 'axios';
 import asyncHandler from '../middlewares/asyncHandler.middleware.js';
 import AppError from '../utils/appError.js';
 import User from '../models/userModel.js';
@@ -11,7 +11,7 @@ const cookieOptions = {
     secure: process.env.NODE_ENV === 'development' ? true : false,
     maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     httpOnly: true,
-}; 
+};
 
 export const signup = asyncHandler(async (req, res, next) => {
     const { fullName, email, password } = req.body;
@@ -36,6 +36,8 @@ export const signup = asyncHandler(async (req, res, next) => {
                 'https://res.cloudinary.com/du9jzqlpt/image/upload/avatar.png',
         },
     });
+
+
 
     if (!user) {
         return next(
@@ -81,6 +83,7 @@ export const signup = asyncHandler(async (req, res, next) => {
         user,
     });
 });
+
 
 export const loginUser = asyncHandler(async (req, res, next) => {
     const { email, password } = req.body;
@@ -174,7 +177,7 @@ export const forgotPassword = asyncHandler(async (req, res, next) => {
             success: true,
             message: `Reset password token has been sent to ${email} successfully`,
         });
-        
+
     } catch (error) {
         user.forgotPasswordToken = undefined;
         user.forgotPasswordExpiry = undefined;

@@ -5,7 +5,6 @@ const linkedinSchema = new Schema(
         given_name: {
             type: String,
             required: [true, 'Name is required'],
-            minlength: [5, 'Name must be at least 5 characters'],
             lowercase: true,
             trim: true,
         },
@@ -30,22 +29,17 @@ const linkedinSchema = new Schema(
         skills: [{
             type: String,
             required: [true, 'Name is required'],
-            minlength: [5, 'Name must be at least 5 characters'],
             lowercase: true,
             trim: true,
         }],
         experience: {
             type: Number,
             required: [true, 'Name is required'],
-            minlength: [5, 'Name must be at least 5 characters'],
-            lowercase: true,
             trim: true,
         },
         location: {
             type: String,
             required: [true, 'Name is required'],
-            minlength: [5, 'Name must be at least 5 characters'],
-            lowercase: true,
             trim: true,
         },
     },

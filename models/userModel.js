@@ -136,10 +136,6 @@ const userSchema = new Schema(
             minlength: [8, 'Password must be at least 8 characters'],
             select: false,
         },
-        subscription: {
-            id: String,
-            status: String,
-        },
         avatar: {
             public_id: {
                 type: String,
@@ -152,6 +148,16 @@ const userSchema = new Schema(
             type: String,
             enum: ['USER', 'ADMIN'],
             default: 'USER',
+        },
+        location: {
+            type: {
+                type: String,
+                default: 'Point',
+            },
+            coordinates: {
+                type: [Number],
+                default: [0, 0], // Default coordinates (e.g., [0, 0] for the world map)
+            },
         },
         forgotPasswordToken: String,
         forgotPasswordExpiry: Date,
